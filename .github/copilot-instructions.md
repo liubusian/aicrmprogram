@@ -6,6 +6,7 @@ This project is a Laravel 13 application using:
 - Laravel 13
 - MySQL as the primary database
 - Vite for frontend asset building
+- Vue 3 for interactive frontend pages
 - pnpm as the package manager
 - Tailwind CSS for UI styling
 - Laravel Breeze for authentication scaffolding
@@ -15,6 +16,7 @@ This project is a Laravel 13 application using:
 - Keep database configuration compatible with MySQL.
 - Use pnpm instead of npm for frontend dependency management.
 - Use Vite for frontend asset compilation and local dev.
+- Use Vue 3 single-file components for CRM page UI and interactions.
 - Keep code aligned with Laravel 13 patterns and Eloquent models.
 
 ## Package manager and commands
@@ -74,10 +76,13 @@ Use these commands when working in this project:
 
 ## Frontend conventions
 - Use Vite for asset bundling.
-- Keep styles primarily in Tailwind utility classes.
-- Prefer Blade views for page structure and Laravel + Tailwind integration.
-- When adding new frontend assets, update the relevant Blade template or Vite entry points.
-- Keep the UI simple, readable, and consistent with the existing Breeze layout.
+- Use Vue 3 with `@vitejs/plugin-vue` for interactive CRM pages; keep shared page behavior in `resources/js/App.vue` or focused Vue components when the scope grows.
+- Treat Blade views as Laravel layout shells and Vue mount points. Pass server-rendered data through the mount element instead of duplicating database queries in the browser.
+- Keep Laravel resource routes, CSRF handling, server-side validation, redirects, search, filtering, and pagination as the source of truth for customer CRUD.
+- Keep Alpine.js only for existing Breeze navigation behavior unless a migration explicitly replaces it.
+- Keep styles primarily in Tailwind utilities and the existing CSS design tokens; avoid introducing a second styling framework.
+- When adding frontend assets or Vue components, update the relevant Blade template and Vite entry points when needed.
+- Keep the UI responsive, readable, and consistent with the existing CRM visual language.
 
 ## Testing requirements
 - Add or update feature tests when changing routes, validation, or database behavior.
@@ -96,5 +101,6 @@ Use these commands when working in this project:
 ## Before finishing a task
 - Run the relevant Laravel test command.
 - If a feature changes frontend assets, run a Vite build check when appropriate.
+- When changing Vue components or Vite configuration, run `pnpm run build`.
 - Confirm the app still works with the existing MySQL setup.
 - Summarize changes and verification results clearly.
